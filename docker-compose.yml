@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  nextjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    tty: true
+    volumes:
+      - ./app:/usr/local/src/app
+      - ./scripts:/usr/local/src/scripts
+      - node_modules:/usr/local/src/app/node_modules
+      - /root/.vscode-server
+
+volumes:
+  node_modules:
