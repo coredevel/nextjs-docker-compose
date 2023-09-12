@@ -1,6 +1,6 @@
 # Next.js docker-compose Boilerplate
 
-This repository provides a quick setup for developing Next.js applications using Docker with docker-compose. It's designed to facilitate VS Code container development without cluttering your host machine with Node.js modules, the Node runtime, npm, or other dependencies. Using Docker volumes for `node_modules` and VS Code container development dependencies allows for faster build times, especially when repeatedly removing and rebuilding the Docker container.
+This repository provides a quick setup for developing Next.js applications using Docker with docker-compose. It's designed to facilitate VS Code container development without cluttering your host machine with Node.js modules, the Node runtime, npm, or other dependencies. Using Docker volumes for `node_modules` and VS Code container dev dependencies allows for faster build times, especially when repeatedly removing and rebuilding the Docker container.
 
 ## Getting Started
 
@@ -17,17 +17,22 @@ This repository provides a quick setup for developing Next.js applications using
     docker-compose up --build
     ```
 
-3. Access the development environment through VS Code by attaching to container and opening the /usr/local/src/app folder
+3. Access the development environment through VS Code by attaching to container and opening the `/usr/local/src/app` folder
 
 ### Using the Run Script
 
-By default, there's a run script at ./scripts/run.sh that attempts to install dependencies from package.json on each container run. You can comment out the 2nd line of the script if you find it undesirable for your use case.
+By default, there's a run script at `./scripts/run.sh` that attempts to install dependencies from package.json on each container run. 
+You can comment out the 2nd line of the script if you find it undesirable for your use case.
 
 ### Adding New NPM Dependencies
 
-To add new npm dependencies, open a terminal to the container:
+To add new npm dependencies, either:
 
-```sh
-docker exec -it name-of-container sh
-npm install package
-```
+1. Open an integrated terminal while attached to the running container within VS code and run `npm install package-name` as usual; or
+
+2. Open a terminal to the container via docker exec:
+
+    ```sh
+    docker exec -it name-of-container sh
+    npm install package
+    ```
