@@ -1,17 +1,17 @@
 # dependencies
-/app/node_modules
-/app/.pnp
-/app/.pnp.js
+/next/node_modules
+/next/.pnp
+/next/.pnp.js
 
 # testing
-/app/coverage
+/next/coverage
 
 # next.js
-/app/.next/
-/app/out/
+/next/.next/
+/next/out/
 
 # production
-/app/build
+/next/build
 
 # misc
 .DS_Store
@@ -19,11 +19,10 @@
 
 # debug
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
@@ -31,4 +30,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-/app/package-lock.json
+/next/package-lock.json

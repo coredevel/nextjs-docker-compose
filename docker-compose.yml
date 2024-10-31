@@ -1,17 +1,33 @@
-version: '3.8'
 services:
   nextjs-app:
+    user: '${MY_UID}:${MY_GID}'
+    container_name: node-nextjs
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./.docker/Dockerfile
+      args:
+        MY_UID: ${MY_UID}
+        MY_GID: ${MY_GID}
+        TARGET_WORKDIR: ${TARGET_WORKDIR}
     ports:
-      - '3000:3000'
+      - 3000:3000
+    env_file:
+      - path: ./.env
+        required: true # default
     tty: true
     volumes:
-      - ./app:/usr/local/src/app
-      - ./scripts:/usr/local/src/scripts
-      - node_modules:/usr/local/src/app/node_modules
-      - /root/.vscode-server
+      # Mount project directory, but ensure it's mounted properly
+      # to not overwrite the initialized project
+      - .:${TARGET_WORKDIR}:delegated
+      # Persist npm cache to avoid refetching on every container build/rebuild
+      - npm_cache:/home/container_user/.npm
+      # VS Code server for dev container usage
+      - vscode-server:/home/container_user/.vscode-server
+      # keep node_modules away from host machine project dir
+      - node_modules:${TARGET_WORKDIR}/next/node_modules
+    command: ['npm', 'run', 'dev']
 
 volumes:
+  npm_cache:
+  vscode-server:
   node_modules:
